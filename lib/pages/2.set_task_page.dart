@@ -73,7 +73,7 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
     );
   }
 
-  Directionality _gettitleField() {
+  Widget _gettitleField() {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextField(
@@ -108,7 +108,7 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
     );
   }
 
-  Directionality _getcommentField() {
+  Widget _getcommentField() {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextField(
@@ -255,5 +255,12 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
           Task(title: taskTitle, comment: taskComment!, time: _taskTime!, taskType: _taskType ?? taskTypeList[0]);
       _taskBox.add(task);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleTextController.text = '';
+    _commentTextController.text = '';
   }
 }
