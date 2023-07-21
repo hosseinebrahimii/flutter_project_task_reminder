@@ -15,7 +15,7 @@ late TextEditingController _titleTextController;
 late TextEditingController _commentTextController;
 FocusNode focusGuard1 = FocusNode();
 FocusNode focusGuard2 = FocusNode();
-// DateTime? _taskTime;
+String _errorLine = '';
 
 class _SetTaskWidgetState extends State<EditTaskPage> {
   @override
@@ -59,6 +59,15 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
                 ),
                 _getTaskTypeList(),
                 const Spacer(),
+                Text(
+                  _errorLine,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'SM',
+                  ),
+                ),
                 _getsaveTaskButton(),
                 const SizedBox(
                   height: 20,
@@ -71,7 +80,7 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
     );
   }
 
-  Directionality _gettitleField() {
+  Widget _gettitleField() {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextField(
@@ -106,7 +115,7 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
     );
   }
 
-  Directionality _getcommentField() {
+  Widget _getcommentField() {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextField(
@@ -204,8 +213,11 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
         ),
       ),
       onPressed: () {
-        _getTask(_titleTextController.text, _commentTextController.text);
-        Navigator.pop(context);
+        setState(() {
+          if (_getTask(_titleTextController.text, _commentTextController.text)) {
+            Navigator.pop(context);
+          }
+        });
       },
       child: const Text('ویرایش تسک'),
     );
@@ -243,13 +255,21 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
     );
   }
 
-  void _getTask(String taskTitle, String? taskComment) {
+  bool _getTask(String taskTitle, String? taskComment) {
     if (taskTitle == '') {
-      print('عنوان حتما باید پر شود');
+      _errorLine = 'عنوان حتما باید پر شود';
+      return false;
     } else {
       widget.task.title = taskTitle;
       widget.task.comment = taskComment!;
       widget.task.save();
+      return true;
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _errorLine = '';
   }
 }

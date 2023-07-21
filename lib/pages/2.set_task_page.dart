@@ -20,6 +20,7 @@ var _titleTextController = TextEditingController();
 var _commentTextController = TextEditingController();
 DateTime? _taskTime;
 TaskType? _taskType;
+String _errorLine = '';
 
 class _SetTaskWidgetState extends State<SetTaskPage> {
   @override
@@ -61,6 +62,15 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
                 ),
                 _getTaskTypeList(),
                 const Spacer(),
+                Text(
+                  _errorLine,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'SM',
+                  ),
+                ),
                 _getsaveTaskButton(),
                 const SizedBox(
                   height: 20,
@@ -205,8 +215,11 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
         ),
       ),
       onPressed: () {
-        _getTask(_titleTextController.text, _commentTextController.text);
-        Navigator.pop(context);
+        setState(() {
+          if (_getTask(_titleTextController.text, _commentTextController.text)) {
+            Navigator.pop(context);
+          }
+        });
       },
       child: const Text('ثبت تسک'),
     );
@@ -243,17 +256,20 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
     );
   }
 
-  void _getTask(String taskTitle, String? taskComment) {
+  bool _getTask(String taskTitle, String? taskComment) {
     if (taskTitle == '') {
-      print('عنوان حتما باید پر شود');
+      _errorLine = 'عنوان حتما باید پر شود';
+      return false;
     } else if (_taskTime == null) {
       {
-        print('زمان تسک را تعیین کنید');
+        _errorLine = 'زمان تسک را تعیین کنید';
+        return false;
       }
     } else {
       Task task =
           Task(title: taskTitle, comment: taskComment!, time: _taskTime!, taskType: _taskType ?? taskTypeList[0]);
       _taskBox.add(task);
+      return true;
     }
   }
 
@@ -262,5 +278,6 @@ class _SetTaskWidgetState extends State<SetTaskPage> {
     super.dispose();
     _titleTextController.text = '';
     _commentTextController.text = '';
+    _errorLine = '';
   }
 }
