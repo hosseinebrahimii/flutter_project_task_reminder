@@ -43,7 +43,7 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 _gettitleField(),
                 const SizedBox(
@@ -53,9 +53,8 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                _getTaskTime(),
                 const SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 _getTaskTypeList(),
                 const Spacer(),
@@ -68,9 +67,9 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
                     fontFamily: 'SM',
                   ),
                 ),
-                _getsaveTaskButton(),
+                _getTaskTime(),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
               ],
             ),
@@ -196,38 +195,11 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
     );
   }
 
-  ElevatedButton _getsaveTaskButton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xff18DAA3),
-        foregroundColor: Colors.white,
-        minimumSize: const Size(200, 45),
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        textStyle: const TextStyle(
-          fontFamily: 'SM',
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      onPressed: () {
-        setState(() {
-          if (_getTask(_titleTextController.text, _commentTextController.text)) {
-            Navigator.pop(context);
-          }
-        });
-      },
-      child: const Text('ویرایش تسک'),
-    );
-  }
-
   CustomHourPicker _getTaskTime() {
     return CustomHourPicker(
-      title: '              زمان تسک را انتخاب کنید',
-      positiveButtonText: 'ثبت زمان                           ',
-      negativeButtonText: 'انصراف',
+      title: '      زمان تسک را انتخاب کنید',
+      positiveButtonText: 'ویرایش تسک                ',
+      negativeButtonText: '',
       titleStyle: const TextStyle(
         color: Color(0xff18DAA3),
         fontSize: 20,
@@ -236,7 +208,7 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
       ),
       positiveButtonStyle: const TextStyle(
         color: Color(0xff18DAA3),
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: FontWeight.w500,
         fontFamily: 'SM',
       ),
@@ -248,6 +220,13 @@ class _SetTaskWidgetState extends State<EditTaskPage> {
       ),
       onPositivePressed: (context, time) {
         widget.task.time = time;
+        setState(
+          () {
+            if (_getTask(_titleTextController.text, _commentTextController.text)) {
+              Navigator.pop(context);
+            }
+          },
+        );
       },
       onNegativePressed: ((context) {}),
       elevation: 2,
