@@ -25,27 +25,40 @@ class _TasksPageState extends State<TasksPage> {
         child: ValueListenableBuilder(
           valueListenable: taskBox.listenable(),
           builder: (BuildContext context, dynamic value, Widget? child) {
-            return NotificationListener<UserScrollNotification>(
-              onNotification: (notification) {
-                setState(
-                  () {
-                    if (notification.direction == ScrollDirection.reverse && taskBox.values.length > 5) {
-                      isTaskListVisible = false;
-                    } else if (notification.direction == ScrollDirection.forward) {
-                      isTaskListVisible = true;
-                    }
-                  },
-                );
-                return true;
-              },
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  Task task = taskBox.values.toList()[index];
-                  return _getListItem(task);
+            if (taskBox.isEmpty) {
+              return const Center(
+                child: Text(
+                  'تسکی ثبت نشده است',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'SM',
+                    color: Colors.grey,
+                  ),
+                ),
+              );
+            } else {
+              return NotificationListener<UserScrollNotification>(
+                onNotification: (notification) {
+                  setState(
+                    () {
+                      if (notification.direction == ScrollDirection.reverse && taskBox.values.length > 5) {
+                        isTaskListVisible = false;
+                      } else if (notification.direction == ScrollDirection.forward) {
+                        isTaskListVisible = true;
+                      }
+                    },
+                  );
+                  return true;
                 },
-                itemCount: taskBox.values.length,
-              ),
-            );
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    Task task = taskBox.values.toList()[index];
+                    return _getListItem(task);
+                  },
+                  itemCount: taskBox.values.length,
+                ),
+              );
+            }
           },
         ),
       ),
