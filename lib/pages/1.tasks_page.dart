@@ -81,9 +81,30 @@ class _TasksPageState extends State<TasksPage> {
                       },
                     );
                   },
-                  child: const Icon(
-                    Icons.delete_outline,
-                    size: 30,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(
+                        Icons.delete_outline,
+                        size: 30,
+                      ),
+                      Positioned(
+                        top: -15,
+                        right: -15,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.red,
+                          radius: 9,
+                          child: Text(
+                            taskRemovingListNotifier.value.length.toString(),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               );
