@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_task_reminder/data/classes/task.dart';
+import 'package:flutter_project_task_reminder/pages/1.tasks_page.dart';
 import 'package:flutter_project_task_reminder/pages/3.edit_task_page.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
 
@@ -9,6 +10,8 @@ class ShowTaskWidget extends StatefulWidget {
   @override
   State<ShowTaskWidget> createState() => _ShowTaskWidgetState();
 }
+
+var taskRemovingListNotifier = ValueNotifier<List<Task>>([]);
 
 class _ShowTaskWidgetState extends State<ShowTaskWidget> {
   @override
@@ -99,6 +102,7 @@ class _ShowTaskWidgetState extends State<ShowTaskWidget> {
             setState(() {
               widget.task.isDone = selected;
               widget.task.save();
+              taskRemovingListNotifier.value = taskBox.values.where((element) => element.isDone == true).toList();
             });
           },
         ),
