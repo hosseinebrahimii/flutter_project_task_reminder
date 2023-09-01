@@ -1,4 +1,4 @@
-import 'package:flutter_project_task_reminder/data/classes/task_type_enum.dart';
+import 'package:flutter_project_task_reminder/models/task_type_enum.dart';
 import 'package:hive/hive.dart';
 part 'task_type.g.dart';
 

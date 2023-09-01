@@ -1,4 +1,4 @@
-import 'package:flutter_project_task_reminder/data/classes/task_type.dart';
+import 'package:flutter_project_task_reminder/models/task_type.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'task.g.dart';

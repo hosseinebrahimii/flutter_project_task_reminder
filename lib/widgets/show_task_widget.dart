@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_task_reminder/data/classes/task.dart';
+import 'package:flutter_project_task_reminder/models/task.dart';
 import 'package:flutter_project_task_reminder/pages/1.tasks_page.dart';
 import 'package:flutter_project_task_reminder/pages/3.edit_task_page.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';

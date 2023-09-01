@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_project_task_reminder/data/classes/task.dart';
-import 'package:flutter_project_task_reminder/data/models/show_task_widget.dart';
+import 'package:flutter_project_task_reminder/models/task.dart';
+import 'package:flutter_project_task_reminder/widgets/show_task_widget.dart';
 import 'package:flutter_project_task_reminder/pages/2.set_task_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_task_reminder/data/classes/task.dart';
-import 'package:flutter_project_task_reminder/data/models/task_type_list.dart';
+import 'package:flutter_project_task_reminder/models/task.dart';
+import 'package:flutter_project_task_reminder/util/task_type_list.dart';
 
 import 'package:time_pickerr/time_pickerr.dart';
 

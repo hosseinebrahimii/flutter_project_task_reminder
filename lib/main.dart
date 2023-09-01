@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_task_reminder/data/classes/task.dart';
-import 'package:flutter_project_task_reminder/data/classes/task_type.dart';
-import 'package:flutter_project_task_reminder/data/classes/task_type_enum.dart';
+import 'package:flutter_project_task_reminder/models/task.dart';
+import 'package:flutter_project_task_reminder/models/task_type.dart';
+import 'package:flutter_project_task_reminder/models/task_type_enum.dart';
 import 'package:flutter_project_task_reminder/pages/1.tasks_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
